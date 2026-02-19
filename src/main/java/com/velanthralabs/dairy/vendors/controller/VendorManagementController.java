@@ -1,12 +1,10 @@
 package com.velanthralabs.dairy.vendors.controller;
 
-import com.velanthralabs.dairy.vendors.dto.VendorDTO;
+import com.velanthralabs.dairy.vendors.dto.*;
 import com.velanthralabs.dairy.vendors.service.VendorManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,17 +12,35 @@ import java.util.List;
 @RequestMapping("/api/vendors")
 @RequiredArgsConstructor
 public class VendorManagementController {
-    private final VendorManagementService vendorManagementService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<VendorDTO>> getAllVendors() {
-        List<VendorDTO> vendors = vendorManagementService.findAllVendors().stream()
-                .map(vendor -> {
-                    VendorDTO dto = new VendorDTO();
-                    // Map fields from vendor to dto
-                    return dto;
-                })
-                .toList();
-        return ResponseEntity.ok(vendors);
+    private final VendorManagementService service;
+
+    @GetMapping
+    public ResponseEntity<List<VendorResponseDTO>> getAll() {
+        return ResponseEntity.ok(service.findAllVendors());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<VendorResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getVendorById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> create(@RequestBody VendorRequestDTO request) {
+        service.createVendor(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id,
+                                       @RequestBody VendorRequestDTO request) {
+        service.updateVendor(id, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.deleteVendor(id);
+        return ResponseEntity.noContent().build();
     }
 }

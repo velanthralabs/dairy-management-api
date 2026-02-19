@@ -1,7 +1,8 @@
 package com.velanthralabs.dairy.vendors.exception;
 
 public class VendorNotFoundException extends RuntimeException {
-    public VendorNotFoundException(String name) {
-        super("Vendor with name" + name + " not found");
+
+    public VendorNotFoundException(Long id) {
+        super("Vendor with id " + id + " not found");
     }
 }

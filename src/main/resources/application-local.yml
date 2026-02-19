@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5555/velanthra_dairy_db}
-    username: ${DB_USER}
-    password: ${DB_PASS}
+    url: jdbc:postgresql://localhost:5432/dairy_db
+    username: postgres
+    password: Aashu0429
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 5
