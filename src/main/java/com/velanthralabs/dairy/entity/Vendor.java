@@ -4,7 +4,6 @@ package com.velanthralabs.dairy.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vendors")
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Vendor {
+public class Vendor extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +30,4 @@ public class Vendor {
     private String centerCode;
 
     private String route;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
-
 }

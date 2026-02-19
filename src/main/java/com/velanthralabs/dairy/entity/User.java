@@ -5,7 +5,6 @@ import com.velanthralabs.dairy.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +32,5 @@ public class User {
     private Role role;
 
     private Boolean active = true;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
-
 }
+
