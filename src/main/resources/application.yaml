@@ -1,25 +1,26 @@
 spring:
   application:
     name: dairy
-  datasource:
-    url: jdbc:postgresql://localhost:5432/dairy_db
-    username: postgres
-    password: Aashu0429
-    driver-class-name: org.postgresql.Driver
+
+  profiles:
+    active: local
+
   jpa:
     hibernate:
-      ddl-auto: update   # creates/updates tables automatically
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+        jdbc:
+          time_zone: UTC
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  config:
-    import: optional:file:.env[.properties]
-  profiles:
-    active: local
-  app:
-    security:
-      jwt:
-        access-token-expiration: 86400000 # 1 day in milliseconds
-        refresh-token-expiration: 604800000 # 7 days in milliseconds
+
+server:
+  port: 8081
+
+app:
+  security:
+    jwt:
+      access-token-expiration: 86400000
+      refresh-token-expiration: 604800000
