@@ -1,9 +1,9 @@
 package com.velanthralabs.dairy.entity;
+import com.velanthralabs.dairy.vendors.domain.Vendor;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "invoices")

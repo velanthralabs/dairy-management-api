@@ -1,12 +1,11 @@
 package com.velanthralabs.dairy.entity;
 
 import com.velanthralabs.dairy.entity.enums.SessionType;
+import com.velanthralabs.dairy.vendors.domain.Vendor;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 
 
 @Entity

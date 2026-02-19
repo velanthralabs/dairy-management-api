@@ -1,12 +1,13 @@
-package com.velanthralabs.dairy.entity;
+package com.velanthralabs.dairy.vendors.domain;
 
 
+import com.velanthralabs.dairy.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 
 @Entity
-@Table(name = "vendors")
+@Table(name = "vendors", schema = "public")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,6 +17,8 @@ public class Vendor extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true)
+    @ToString.Include
     private Long id;
 
     @Column(nullable = false)
