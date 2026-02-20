@@ -13,34 +13,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VendorManagementController {
 
-    private final VendorManagementService service;
+    private final VendorManagementService vendorManagementService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<VendorResponseDTO>> getAll() {
-        return ResponseEntity.ok(service.findAllVendors());
+        return ResponseEntity.ok(vendorManagementService.findAllVendors());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<VendorResponseDTO> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getVendorById(id));
+        return ResponseEntity.ok(vendorManagementService.getVendorById(id));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestBody VendorRequestDTO request) {
-        service.createVendor(request);
+        vendorManagementService.createVendor(request);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id,
                                        @RequestBody VendorRequestDTO request) {
-        service.updateVendor(id, request);
+        vendorManagementService.updateVendor(id, request);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.deleteVendor(id);
+        vendorManagementService.deleteVendor(id);
         return ResponseEntity.noContent().build();
     }
 }
