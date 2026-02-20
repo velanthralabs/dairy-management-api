@@ -20,7 +20,6 @@ server:
   port: 8081
 
 app:
-  security:
-    jwt:
-      access-token-expiration: 86400000
-      refresh-token-expiration: 604800000
+  jwt:
+    secret: vElAnThRaLaBsDaIrYmAnAgEmEnTsYsTeM2026S3cReT
+    expiration-ms: 86400000

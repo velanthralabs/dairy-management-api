@@ -17,15 +17,11 @@ import java.util.TimeZone;
 @EnableAsync
 @EnableScheduling
 @EnableSchedulerLock(defaultLockAtMostFor = "5m")
-@EntityScan(basePackages = "com.velanthralabs.dairy.*.domain")
-@EnableJpaRepositories(basePackages = "com.velanthralabs.dairy.*.repository")
-@ComponentScan("com.velanthralabs.dairy")
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class DairyApplication {
 
 	public static void main(String[] args) {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		SpringApplication.run(DairyApplication.class, args);
 	}
-
 }
