@@ -1,0 +1,19 @@
+package com.velanthralabs.dairy.features.vendors.dto;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class VendorResponseDTO {
+
+    private Long id;
+    private String name;
+    private String phone;
+    private String bankAccount;
+    private String bankName;
+    private String centerCode;
+    private String route;
+}
