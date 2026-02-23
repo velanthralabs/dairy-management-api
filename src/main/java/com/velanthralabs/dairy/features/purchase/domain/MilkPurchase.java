@@ -5,10 +5,13 @@ import com.velanthralabs.dairy.core.enums.SessionType;
 import com.velanthralabs.dairy.features.vendors.domain.Vendor;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@Audited
 @Table(name = "milk_purchases")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class MilkPurchase extends BaseEntity {
