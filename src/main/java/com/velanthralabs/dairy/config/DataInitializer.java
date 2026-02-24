@@ -1,8 +1,8 @@
 package com.velanthralabs.dairy.config;
 
-import com.velanthralabs.dairy.core.entity.User;
-import com.velanthralabs.dairy.core.enums.Role;
-import com.velanthralabs.dairy.features.user.repository.UserRepository;
+import com.velanthralabs.dairy.common.entity.User;
+import com.velanthralabs.dairy.common.enums.Role;
+import com.velanthralabs.dairy.user.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -17,6 +17,7 @@ public class DataInitializer implements CommandLineRunner {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
 
     @Override
     public void run(String... args) throws Exception {
