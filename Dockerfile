@@ -1,31 +1,33 @@
-# Use Eclipse Temurin (OpenJDK) 21 for runtime
-FROM eclipse-temurin:21-jdk-jammy AS build
+############################
+# 1️⃣ Build Stage
+############################
+FROM maven:3.9.6-eclipse-temurin-21 AS builder
 
-# Set working directory
 WORKDIR /app
-COPY mvnw .
-COPY .mvn .mvn
+
+# Copy pom first for caching dependencies
 COPY pom.xml .
-COPY src src
+RUN mvn dependency:go-offline
 
-RUN chmod +x ./mvnw
-RUN ./mvnw clean package -DskipTests
+# Copy source code
+COPY src ./src
 
-#Runtime stage
-FROM eclipse-temurin:21-jdk-jammy
-ARG PROFILE=prod
-ARG APP_VERSION=1.0.0
+# Build the jar
+RUN mvn clean package -DskipTests
+
+
+############################
+# 2️⃣ Runtime Stage
+############################
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
-COPY --from=build /app/target/*.jar /app/
 
+# Copy generated jar
+COPY --from=builder /app/target/*.jar app.jar
+
+# Expose Spring Boot port
 EXPOSE 8081
 
-ENV DB_URL=jdbc:postgresql://localhost:5432/mydb
-
-ENV DB_URL=jdbc:postgresql://postgres-sql-spring-app:5432/spring_app_db
-
-ENV ACTIVE_PROFILE=${PROFILE}
-ENV JAR_VERSION=${APP_VERSION}
-
-CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} spring-security-asymmetric-encryption-${JAR_VERSION}.jar
+# Run the application
+ENTRYPOINT ["java","-jar","/app/app.jar"]
